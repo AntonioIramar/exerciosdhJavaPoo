@@ -2,18 +2,14 @@ package br.com.dhexercio;
 
 public class PessoaJuridica extends Funcionario {
 
-	private static final long serialVersionUID = 1L;
-
 	private String cnpj;
-	private String cargo;
 
 	public PessoaJuridica() {
 	}
 
-	public PessoaJuridica(String cnpj, String cargo) {
+	public PessoaJuridica(String cnpj) {
 
 		this.cnpj = cnpj;
-		this.cargo = cargo;
 	}
 
 	public String getCnpj() {
@@ -24,55 +20,25 @@ public class PessoaJuridica extends Funcionario {
 		this.cnpj = cnpj;
 	}
 
-	public String getCargo() {
-		return cargo;
+	@Override
+	public String toString() {
+		return "PessoaJuridica [cnpj=" + cnpj + ", getId()=" + getId() + ", getNome()=" + getNome() + ", getEndereco()="
+				+ getEndereco() + ", getCpf()=" + getCpf() + ", getEmail()=" + getEmail() + ", getSetor()=" + getSetor()
+				+ ", getDataAdmissao()=" + getDataAdmissao() + ", getDataDemissao()=" + getDataDemissao()
+				+ ", getCargo()=" + getCargo() + "]";
 	}
 
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
+	public double consultarContraCheque() {
+
+		return this.salarioBase;
+
 	}
 
-	public double getSalarioBase() {
-		return salarioBase;
-	}
+	public void reajustarSalario(double reajuste) {
 
-	public void setSalarioBase(double salarioBase) {
-		this.salarioBase = salarioBase;
-	}
+		if (reajuste > 0.00) {
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	public void bonificacao() {
-
-		if (this.cargo.equals("Gerente")) {
-
-			double aumento = 0.12;
-
-		 	this.salarioBase = salarioBase + (salarioBase * aumento);
-
-			System.out.println("Novo salário R$ : " + salarioBase);
-		}
-
-		else if (this.cargo.equals("Supervisor")) {
-
-			double aumento = 0.08;
-
-			this.salarioBase = salarioBase + (salarioBase * aumento);
-
-			System.out.println("Novo salário R$ : " + this.salarioBase);
-		} else {
-			System.out.println("Bonificação não aplicada para o funcionário");
-		}
-	}
-
-	public void reajustarSalario(double salario, double reajusteSalarial) {
-
-		if (reajusteSalarial > 0.00) {
-
-			this.salarioBase = salario + reajusteSalarial;
-			System.out.println("Novo salário com reajuste R$ : " + this.salarioBase);
+			this.salarioBase = salarioBase + (salarioBase * reajuste);
 		}
 
 		else {
@@ -89,23 +55,5 @@ public class PessoaJuridica extends Funcionario {
 			System.out.println("Você não pode tirar férias ");
 		}
 	}
-
-	public void gerenteDemitir() {
-
-		if (!this.cargo.equals("Gerente")) {
-
-			System.out.println("Demitir um funcionário ou um supervisor!");
-
-		}
-	}
-
-	public void supervisorDemitir() {
-
-		if (!this.cargo.equals("Surpervisor") && (!this.cargo.equals("Gerente"))) {
-
-			System.out.println("Demitir um funcionário!");
-		}
-	}
-
 
 }

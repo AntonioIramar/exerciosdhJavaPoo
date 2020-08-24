@@ -1,13 +1,7 @@
 package br.com.dhexercio;
 
-import java.io.Serializable;
-
-public class Funcionario implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+public class Funcionario {
+	private Long id;
 	private String nome;
 	private String endereco;
 	private String cpf;
@@ -16,14 +10,14 @@ public class Funcionario implements Serializable {
 	private String dataAdmissao;
 	private String dataDemissao;
 	protected double salarioBase;
+	private String cargo;
 
-	
 	public Funcionario() {
 	}
 
-	public Funcionario(String nome, String endereco, String cpf, String email, String setor, String dataAdmissao,
-			String dataDemissao, double salarioBase) {
-		
+	public Funcionario(Long id, String nome, String endereco, String cpf, String email, String setor,
+			String dataAdmissao, String dataDemissao, double salarioBase, String cargo) {
+		this.id = id;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.cpf = cpf;
@@ -32,6 +26,15 @@ public class Funcionario implements Serializable {
 		this.dataAdmissao = dataAdmissao;
 		this.dataDemissao = dataDemissao;
 		this.salarioBase = salarioBase;
+		this.cargo = cargo;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -89,7 +92,7 @@ public class Funcionario implements Serializable {
 	public void setDataDemissao(String dataDemissao) {
 		this.dataDemissao = dataDemissao;
 	}
-	
+
 	public double getSalarioBase() {
 		return salarioBase;
 	}
@@ -98,22 +101,74 @@ public class Funcionario implements Serializable {
 		this.salarioBase = salarioBase;
 	}
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getCargo() {
+		return cargo;
 	}
-	
-	public void consultarContraCheque() {
 
-		System.out.println("Salário disponivesl R$ : " + this.salarioBase);
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Funcionario other = (Funcionario) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Funcionario [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", cpf=" + cpf + ", email="
+				+ email + ", setor=" + setor + ", dataAdmissao=" + dataAdmissao + ", dataDemissao=" + dataDemissao
+				+ ", salarioBase=" + salarioBase + ", cargo=" + cargo + "]";
+	}
+
+   public double consultarContraCheque() {
+
+		return this.salarioBase;
 
 	}
-	
+
 	public void verificarFerias(boolean ferias) {
 
 		if (ferias == true) {
 
-			System.out.println("Não pode trabalho");
+			System.out.println("Não pode trabalhar em férias");
+		} else {
+
+			System.out.println("Não pode trabalhar em férias");
 		}
 	}
+	public void reajustar(double reajuste) {
+
+		if (reajuste > 0.00) {
+
+			this.salarioBase = salarioBase + (salarioBase * reajuste);
+		}
+
+		else {
+			System.out.println("Reajuste salarial não aplicado!");
+		}
+	
+	}
+
+	
 }

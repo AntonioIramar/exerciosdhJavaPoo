@@ -6,57 +6,79 @@ public class Principal {
 
 	public static void main(String[] args) {
 
-		Funcionario func = new Funcionario ("Maria Rios", "Rua sete de Abril, 3443", "555.777.890-67", "mm.martins@yahoo.com.br", "TI", "20/10/2000", "01/01/0001", 45000.00);
+		Funcionario func = new Funcionario(null, "Maria Rios", "Rua sete de Abril, 3443", "555.777.890-67",
+				"mm.martins@yahoo.com.br", "TI", "20/10/2000", "01/01/0001", 3500.00, "Supervisor");
 		func.setEndereco("Rua Margarida, 3434");
 
-		JOptionPane.showMessageDialog(null, "Nome : " + func.getNome() + "\n Endereço : " + func.getEndereco()
-				+ "\n CPF : " + func.getCpf() + "\n E-Mail : " + func.getEmail() + "\n Setor: " + func.getSetor());
+		JOptionPane.showMessageDialog(null,
+				"Nome : " + func.getNome() + "\n Endereço : " + func.getEndereco() + "\n CPF : " + func.getCpf()
+						+ "\n E-Mail : " + func.getEmail() + "\n Setor: " + func.getSetor() + "\n Cargo: "
+						+ func.getCargo());
 
-		PessoaJuridica pj = new PessoaJuridica("55.777.890/0001", "Analista de Sistemas");
-		pj.setNome(JOptionPane.showInputDialog(null, "Informe o novo do nome."));
-
+		PessoaJuridica pj = new PessoaJuridica("55.777.890/0001");
+		pj.setNome("Tecnológia inovação");
+		pj.setEmail("mmmti@gmail.com");
+		pj.setCargo("PJ");
 		JOptionPane.showMessageDialog(null, "Nome : " + pj.getNome() + "\n CNPJ : " + pj.getCnpj() + "\n Cargo: "
-				+ pj.getCargo());
+				+ pj.getCargo() + "\n E-Mail : " + pj.getEmail());
 
-	   PessoaFisica pf = new PessoaFisica();
-	   
-	   
-	     pf.setSalarioBase(3000.00);
+		Funcionario f1 = new Funcionario();
 
-	     pf.consultarContraCheque();
+		f1.setSalarioBase(11000.00);
 
-	     pf.reajustarSalario(12000.00, 1000.00);
-		
-		 pf.requisitarFerias(11, 4);
-				
-		 pj.setSalarioBase(3000.00);
+		f1.setCargo("Funcionario");
 
-	     pj.consultarContraCheque();
+		f1.reajustar(0.12);
 
-	     pj.reajustarSalario(12000.00, 1000.00);
-		
-	     pj.requisitarFerias(11, 4);
+		System.out.println("Reajuste para o cargo de " + f1.getCargo() + " R$ : " + f1.getSalarioBase());
 
+		f1.consultarContraCheque();
+
+		System.out.println("Valor disponivel para o cargo de " + f1.getCargo() + " R$ : " + f1.getSalarioBase());
+
+		PessoaFisica pf = new PessoaFisica();
+
+		pf.setSalarioBase(11000.00);
+
+		pf.setCargo("Supervisor");
+
+		pf.reajustar(0.12);
+
+		System.out.println("Reajuste salarial PF, para o cargo de " + pf.getCargo() + " R$ : " + pf.getSalarioBase());
+
+		pf.bonificacao();
+
+		System.out.println("Bonificação padão PF, para o cargo de " + pf.getCargo() + " R$ : " + pf.getSalarioBase());
+
+		pf.consultarContraCheque();
+
+		System.out.println("Saldo disponivel PF, para o cargo de " + pf.getCargo() + " R$ : " + pf.getSalarioBase());
+
+		pf.setCargo("Supervisor");
+
+		pf.gerenteDemitir();
+
+		pf.setCargo("Funcionario");
+
+		pf.supervisorDemitir();
+
+		pf.requisitarFerias(10, 4);
+
+		pf.funcSalicitar("Demissão");
+
+		PessoaJuridica j1 = new PessoaJuridica();
+
+		j1.setSalarioBase(11000.00);
+
+		j1.setCargo("Analista de Sistemas");
+
+		j1.reajustar(0.25);
+
+		System.out.println("Reajuste salarial PJ, para o cargo de " + j1.getCargo() + " R$ : " + j1.getSalarioBase());
+
+		j1.consultarContraCheque();
+
+		System.out.println(
+				"Saldo disponivel PJ, disponivel para o cargo de " + j1.getCargo() + " R$ : " + j1.getSalarioBase());
 	}
 }
-
-
- 
-/*
- * public class FuncionarioTeste {
- * 
- * private String nome; private String cfunc; private double salario; private
- * int tipo = 0; //0 = Funcionário comum; 1 = Gerente; 2 = Diretor
- * 
- * public double getBonificacao() {
- * 
- * if(this.tipo == 0) { // Funcionário comum; return this.salario * 0.1; } else
- * if(this.tipo == 1) { // Gerente; return this.salario; } else { return
- * this.salario + 1000.0; }
- * 
- * }
- * 
- * public void setTipo(int tipo) { this.tipo = tipo; }
- * 
- * public int getTipo() { return tipo; }
- */
